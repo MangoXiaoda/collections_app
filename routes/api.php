@@ -23,6 +23,12 @@ $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api'
 ], function($api) {
     // 添加物品
-    $api->post('addGoods', 'AddGoodsController@store')
-        ->name('api.AddGoodsController.store');
+    $api->post('addGoods', 'GoodsController@store')
+        ->name('api.GoodsController.store');
+
+    // 添加卡片
+    $api->post('addCard', 'CardController@store')
+        ->name('api.CardController.store');
+
+
 });
