@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -47,5 +48,16 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+
+    public function convertValidationExceptionToResponse(ValidationException $e, $request)
+    {
+        $data = $e->validator->getMessageBag();
+        $msg = collect($data)->first();
+        if(is_array($msg)){
+            $msg = $msg[0];
+        }
+        return ['code'=> 201,'msg'=>$msg];
     }
 }

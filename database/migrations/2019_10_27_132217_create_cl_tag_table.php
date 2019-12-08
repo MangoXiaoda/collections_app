@@ -16,18 +16,18 @@ class CreateClTagTable extends Migration
         Schema::create('cl_tag', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->tinyInteger('parentid')
-                ->default(null)
+            $table->integer('parentid')
+                ->default(0)
                 ->nullable(true)
                 ->comment('对应卡片表主键ID');
 
-            $table->tinyInteger('order')
-                ->default(null)
+            $table->integer('order')
+                ->default(0)
                 ->nullable(true)
                 ->comment('排序');
 
             $table->string('tag_name')
-                ->default(null)
+                ->default('')
                 ->nullable(true)
                 ->comment('标签名称');
 

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Dingo\Api\Http\Request;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // 接管 dingoAPI 报错异常信息
+        app('api.exception')->register(function (\Exception $exception) {
+            $request = Request::capture();
+            return app('App\Exceptions\Handler')->render($request, $exception);
+        });
     }
 }

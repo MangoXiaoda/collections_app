@@ -12,14 +12,13 @@ class CardController extends Controller
 
     public function store(CardRequest $request, Card $card)
     {
-
-//        $card_style = $request->card_style ?? '';
-//        $tag_id = $request->tag_id ?? '';
+        $card_style = $request->card_style ?? '';
+        $tag_id = $request->tag_id ?? '';
 //        dd(213213);
         $card->card_name = $request->card_name;
 //        $card->card_style = $card_style;
 //        $card->tag_id = $tag_id;
-        $card->save();
+//        $card->save();
 
         return $this->response->array(['test_message' => 'ok']);
     }

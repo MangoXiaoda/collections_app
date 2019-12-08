@@ -16,22 +16,34 @@ class CreateClCardTable extends Migration
         Schema::create('cl_card', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->string('card_name')
+            $table->integer('uid')
+                ->default(0)
+                ->nullable(true)
+                ->comment('会员编号');
+
+            $table->string('dev_info')
+                ->default('')
+                ->nullable(true)
+                ->comment('设备信息');
+
+            $table->string('cd_name')
                 ->default(null)
                 ->nullable(true)
                 ->comment('卡片名称');
 
-            $table->text('card_style')
+            $table->text('cd_style')
                 ->default(null)
                 ->nullable(true)
                 ->comment('卡片样式 json存储');
 
             $table->string('tag_id')
-                ->default(null)
+                ->default(0)
                 ->nullable(true)
                 ->comment('标签ID 多个用,隔开');
 
             $table->timestamps();
+            $table->index('uid');
+            $table->index('dev_info');
         });
     }
 
